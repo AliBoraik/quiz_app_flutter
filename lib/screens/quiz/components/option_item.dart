@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz/constants.dart';
-import 'package:quiz/models/quiz_provider.dart';
+import 'package:quiz/provider/quiz_provider.dart';
 
 class OptionItem extends StatelessWidget {
   final String text;
