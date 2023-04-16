@@ -14,7 +14,8 @@ class OptionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuizProvider quizProvider = Provider.of<QuizProvider>(context);
+    QuizProvider quizProvider =
+        Provider.of<QuizProvider>(context, listen: false);
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
