@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/constants.dart';
-import 'package:quiz/models/question.dart';
 
 class QuestionCard extends StatelessWidget {
-  final Question question;
-  const QuestionCard({super.key, required this.question});
+  final String questionText;
+  const QuestionCard({super.key, required this.questionText});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class QuestionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            question.question,
+            questionText,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: kBlackColor,
                   fontWeight: FontWeight.bold,
@@ -26,7 +25,7 @@ class QuestionCard extends StatelessWidget {
             height: kDefaultPadding,
           ),
           Text(
-            "Answer and get points",
+            kQuestionStimulationText,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: Colors.black38,
                   fontWeight: FontWeight.bold,

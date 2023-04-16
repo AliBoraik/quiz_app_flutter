@@ -1,7 +1,9 @@
+import 'option.dart';
+
 class Question {
   final int id, answer;
   final String question;
-  final List<String> options;
+  final List<Option> options;
   Question({
     required this.id,
     required this.answer,

@@ -20,7 +20,7 @@ class ScoreScreen extends StatelessWidget {
             children: [
               const Spacer(flex: 3),
               Text(
-                quizProvider.userName.toUpperCase(),
+                quizProvider.userName,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -43,8 +43,8 @@ class ScoreScreen extends StatelessWidget {
               const Spacer(flex: 1),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      WelcomeScreen.routeName, (Route<dynamic> route) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, WelcomeScreen.routeName, (route) => false);
                 },
                 child: Container(
                   width: 200,
@@ -55,7 +55,7 @@ class ScoreScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    "Start Quiz Again",
+                    kScoreStartAgainText,
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,

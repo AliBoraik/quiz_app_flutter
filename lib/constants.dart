@@ -13,5 +13,20 @@ const kPrimaryGradient = LinearGradient(
 );
 
 const double kDefaultPadding = 20.0;
-// string constants
+
+///
+///     ##### string constants ######
+///
+
+// main page
 const kQuizAppTitle = "Quiz App";
+// welcome page
+const kWelcomeTitleText = "Let's Play Quiz,";
+const kWelcomeTitleDescriptionText = "Enter your information below";
+const kWelcomeHintTextField = "Full Name";
+const kWelcomeErrorTextField = "Name Can't be empty!";
+const kWelcomeButtonText = "Let's Start Quiz";
+// quiz page
+const kQuestionStimulationText = "Answer and get points";
+// score page
+const kScoreStartAgainText = "Start Quiz Again";

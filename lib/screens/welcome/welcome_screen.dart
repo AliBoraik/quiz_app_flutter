@@ -48,25 +48,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   flex: 2,
                 ),
                 Text(
-                  "Let's Play Quiz,",
+                  kWelcomeTitleText,
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
-                const Text("Enter your information below"),
+                const Text(kWelcomeTitleDescriptionText),
                 const Spacer(),
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.black,
-                    errorText: _validate ? 'Name Can\'t be empty!' : null,
+                    errorText: _validate ? kWelcomeErrorTextField : null,
                     hintStyle: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
                     ),
-                    hintText: "Full Name",
+                    hintText: kWelcomeHintTextField,
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -86,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
-                      "Let's Start Quiz",
+                      kWelcomeButtonText,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

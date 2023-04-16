@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/models/option.dart';
 import 'package:quiz/models/question.dart';
+import 'package:quiz/screens/welcome/welcome_screen.dart';
 
 import '../screens/score/score_screen.dart';
 
 class QuizProvider with ChangeNotifier {
-  final _pageController = PageController(initialPage: 0);
   late int _questionNumber;
   late bool _isAnswered = false;
   late int _correctAns;
   late int _selectedAns;
   late String _userName = "";
   late int _numOfCorrectAns;
+  final PageController _pageController = PageController(initialPage: 0);
 
   // gets
   bool get isAnswered => _isAnswered;
   int get correctAns => _correctAns;
   int get selectedAns => _selectedAns;
+  int get questionNumber => _questionNumber;
   int get numOfCorrectAns => _numOfCorrectAns;
-  PageController get pageController {
-    return _pageController;
-  }
-
-  int get questionNumber {
-    return _questionNumber;
-  }
+  PageController get pageController => _pageController;
 
   String get userName {
     return _userName;
@@ -31,28 +28,30 @@ class QuizProvider with ChangeNotifier {
 
   List<Question> get data {
     return sampleData
-        .map((e) => Question(
+        .map(
+          (e) => Question(
               id: e["id"],
               answer: e["answer_index"],
               question: e["question"],
-              options: e["options"],
-            ))
+              options: (e["options"] as List<String>)
+                  .map((e) => Option(e))
+                  .toList()),
+        )
         .toList();
   }
 
   // funtions
   void checkAns(Question question, int selectedIndex, BuildContext context) {
-    _isAnswered = true;
-    _correctAns = question.answer;
-    _selectedAns = selectedIndex;
-
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
-
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      nextQuestion(context);
-    });
+    if (!_isAnswered) {
+      _isAnswered = true;
+      _correctAns = question.answer;
+      _selectedAns = selectedIndex;
+      if (_correctAns == _selectedAns) _numOfCorrectAns++;
+      notifyListeners();
+      Future.delayed(const Duration(seconds: 2), () {
+        _nextQuestionPage(context);
+      });
+    }
   }
 
   void setUserNameAndStartQuiz(String name) {
@@ -64,20 +63,29 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void nextQuestion(BuildContext context) {
+  void _nextQuestionPage(BuildContext context) {
     _isAnswered = false;
-    if (questionNumber != data.length) {
+    if (_hasQuestions()) {
       _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.ease);
+          duration: const Duration(milliseconds: 300), curve: Curves.ease);
     } else {
-      Navigator.of(context).popAndPushNamed(ScoreScreen.routeName);
+      Navigator.pushNamed(context, ScoreScreen.routeName);
     }
+    notifyListeners();
+  }
+
+  void setIsAnswered(bool newIsAnsweaed) {
+    _isAnswered = newIsAnsweaed;
     notifyListeners();
   }
 
   void updateTheQnNum(int index) {
     _questionNumber = index + 1;
     notifyListeners();
+  }
+
+  bool _hasQuestions() {
+    return questionNumber != data.length;
   }
 }
 
